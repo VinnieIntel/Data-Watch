@@ -1,5 +1,10 @@
 *Setup Guide*
 
+# Prerequisites
+- Git
+- Node.js
+- npm
+
 # 1. Clone the Repository
 
 First, clone this repository to your local machine:
