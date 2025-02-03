@@ -1,0 +1,4 @@
+This is the Rule AAA Wiki page 
+* the details of this rule is written here...*
+
+        helo

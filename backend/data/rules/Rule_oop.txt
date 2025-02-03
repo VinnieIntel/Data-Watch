@@ -1,0 +1,2 @@
+This is the Rule OOP Wiki page 
+* the details of this rule is written here...*

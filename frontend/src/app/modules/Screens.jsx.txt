@@ -1,0 +1,22 @@
+import React from 'react';
+import { Route } from 'react-router-dom';
+import Home from './Home/Screens/Home';
+import Wiki from './Wiki';
+import WikiRule from './WikiRule';
+import Landing from './Landing';
+import Status from './Status';
+import Error from './Error/Screens/Error';
+
+
+const Screens = (
+    <>
+        <Route path="/" element={<Landing />} />
+        <Route path="/Wiki" element={<Wiki />} />
+        <Route path="/Wiki/:ruleId" element={<WikiRule />} /> {/* Dynamic parameter */}
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Status" element={<Status />} />
+        <Route path="/Error" element={<Error />} />
+    </>
+);
+
+export default Screens;
