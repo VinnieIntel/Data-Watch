@@ -9,6 +9,7 @@ const COLORS = {
     royalBlue:'#4169e1',
     darkBlue:'#00008b',
     darkGreen:'#006400',
+    logDarkBlue: '#1f2937',
     forestGreen:'#228b22',
     darkSeaGreen:'#8fbc8f',
     lightGreen:'#90ee90',
