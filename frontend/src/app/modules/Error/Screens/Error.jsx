@@ -63,7 +63,7 @@ const Error = () => {
     // Fetch logs when the component mounts and then refresh every 5 seconds.
     useEffect(() => {
         fetchLogs();
-        const interval = setInterval(fetchLogs, 5000);
+        const interval = setInterval(fetchLogs, 60000);
         return () => clearInterval(interval);
     }, []);
 
