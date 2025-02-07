@@ -13,7 +13,8 @@ const COLORS = {
     forestGreen:'#228b22',
     darkSeaGreen:'#8fbc8f',
     lightGreen:'#90ee90',
-    lightestGreen:'#e9ffdb'
+    lightestGreen:'#e9ffdb',
+    red:'#dc2626',
 };
 
 export default COLORS;
