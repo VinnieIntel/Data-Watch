@@ -37,14 +37,49 @@ os.makedirs(log_dir, exist_ok=True)
 
 log_file_path = os.path.join(log_dir, "logfile_DOMtoCSV.log")
 
+# Common log format
+log_format = '%(asctime)s - %(levelname)s - %(message)s'
+
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    format=log_format,
     handlers=[
         logging.FileHandler(log_file_path),
-        logging.StreamHandler()  # Uncomment this line if you also want to print to the console
+        logging.StreamHandler(),  # Uncomment this line if you also want to print to the console
     ]
 )
+
+# --- Error Logger: logs only errors with full details ---
+error_logger = logging.getLogger('error_logger')
+error_logger.setLevel(logging.WARNING) # Capture both WARNING and ERROR levels
+
+# Create file handler for error logs
+error_handler = logging.FileHandler(os.path.join(log_dir, 'error.log'))
+error_handler.setLevel(logging.WARNING)
+
+# Set formatter to include timestamp, ERROR keyword, and message
+formatter = logging.Formatter(log_format)
+error_handler.setFormatter(formatter)
+
+# Add handler to error_logger
+error_logger.addHandler(error_handler)
+
+
+
+# --- Example Usage ---
+logging.info("This is an informational message.") #  in main log only
+logging.error("This is a general error message.")  # in main log only
+logging.warning("This is a warning message!") #  in main log only
+error_logger.error("Critical system failure detected!")  # in both main and error.log
+error_logger.warning("Disk space running low!") # in both main and error.log
+
+
+# Another example of catching exceptions and logging them 
+try:
+    1 / 0  # Will cause ZeroDivisionError
+except Exception as e:
+    error_logger.error("An exception occurred: %s", e)
+
 
 def get_base64_image(image_path):
     with open(image_path, "rb") as image_file:
@@ -94,7 +129,7 @@ class RuleProcessor:
                         try:
                             sot_values.append(float(value))
                         except ValueError:
-                            logging.warning(f"Non-numeric value encountered for key {key}: {value}")
+                            error_logger.warning(f"Non-numeric value encountered for key {key}: {value}")
 
             # Determine severity
             if not sot_values:
@@ -423,16 +458,19 @@ class LogFileHandler(FileSystemEventHandler):
                     
                 break  # Exit the loop if successful
             except PermissionError as e:
-                logging.warning(f"Permission denied: {e}. Retrying...")
+                error_logger.warning(f"Permission denied: {e}. Retrying...")
+                
                 time.sleep(5)  # Wait for 5 seconds before retrying
                 attempts -= 1
             except Exception as e:
-                logging.error(f"An error occurred: {e}. Retrying...")
-                logging.error(traceback.format_exc())
+                error_logger.error(f"An error occurred: {e}. Retrying...")
+                error_logger.error(traceback.format_exc())
+
                 time.sleep(5)  # Wait for 5 seconds before retrying
                 attempts -= 1
         if attempts == 0:
-            logging.error(f"Failed to process file {file_path} after multiple attempts.")
+            error_logger.error(f"Failed to process file {file_path} after multiple attempts.")
+            
         
         
 # Base directory where the HXV folders are located
