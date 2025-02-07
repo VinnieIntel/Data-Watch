@@ -2,6 +2,7 @@ from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 import csv
+import re
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS to allow React to access the API
@@ -116,6 +117,49 @@ def download_rule_python():
         return send_from_directory(BACKEND_FOLDER, file_name, as_attachment=True, mimetype='text/x-python')
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+############################### ERROR ####################################
+
+# Path to the Log file for Error Page
+ERROR_LOG_PATH = os.path.join(os.path.dirname(__file__),'data','logfiles','error.log')
+
+def group_log_lines(file_path):
+    """
+    Groups log lines by detecting new log entries that start with a timestamp.
+    Assumes that a new log entry begins with a line that starts with a 4-digit year.
+    """
+    grouped_logs = []
+    current_block = ""
+    # Regular expression to detect a new log entry based on a timestamp at the beginning of the line.
+    timestamp_pattern = re.compile(r'^\d{4}-\d{2}-\d{2}')
+    
+    with open(file_path, 'r') as f:
+        for line in f:
+            line = line.rstrip()  # Remove any trailing newline characters.
+            if timestamp_pattern.match(line):
+                # If we already have a block, start a new one.
+                if current_block:
+                    grouped_logs.append(current_block)
+                current_block = line  # Start a new block
+            else:
+                # Append subsequent lines to the current block.
+                current_block += "\n" + line
+        # Append the final block if it exists.
+        if current_block:
+            grouped_logs.append(current_block)
+    return grouped_logs
+
+@app.route('/api/errors', methods=['GET'])
+def get_error_logs():
+    if os.path.exists(ERROR_LOG_PATH):
+        try:
+            logs = group_log_lines(ERROR_LOG_PATH)
+            return jsonify(logs)
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+    else:
+        return jsonify({"message": "No error log found."}), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)
