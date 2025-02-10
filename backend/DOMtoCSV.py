@@ -20,6 +20,9 @@ from collections import OrderedDict
 import base64
 
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# Set the working directory to the directory containing the script
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 
 # Define fixed headers
 fixed_headers =['tool_id', 'lot_id']
@@ -52,33 +55,30 @@ logging.basicConfig(
 # --- Error Logger: logs only errors with full details ---
 error_logger = logging.getLogger('error_logger')
 error_logger.setLevel(logging.WARNING) # Capture both WARNING and ERROR levels
-
 # Create file handler for error logs
 error_handler = logging.FileHandler(os.path.join(log_dir, 'error.log'))
 error_handler.setLevel(logging.WARNING)
-
 # Set formatter to include timestamp, ERROR keyword, and message
 formatter = logging.Formatter(log_format)
 error_handler.setFormatter(formatter)
-
 # Add handler to error_logger
 error_logger.addHandler(error_handler)
 
 
 
-# --- Example Usage ---
-logging.info("This is an informational message.") #  in main log only
-logging.error("This is a general error message.")  # in main log only
-logging.warning("This is a warning message!") #  in main log only
-error_logger.error("Critical system failure detected!")  # in both main and error.log
-error_logger.warning("Disk space running low!") # in both main and error.log
+# # --- Example Usage ---
+# logging.info("This is an informational message.") #  in main log only
+# logging.error("This is a general error message.")  # in main log only
+# logging.warning("This is a warning message!") #  in main log only
+# error_logger.error("Critical system failure detected!")  # in both main and error.log
+# error_logger.warning("Disk space running low!") # in both main and error.log
 
 
 # Another example of catching exceptions and logging them 
-try:
-    1 / 0  # Will cause ZeroDivisionError
-except Exception as e:
-    error_logger.error("An exception occurred: %s", e)
+# try:
+#     1 / 0  # Will cause ZeroDivisionError
+# except Exception as e:
+#     error_logger.error("An exception occurred: %s", e)
 
 
 def get_base64_image(image_path):
@@ -90,6 +90,7 @@ def get_base64_image(image_path):
 ########################################################################
 
 class RuleProcessor:
+    print("In RuleProcessor")
     def __init__(self):
         self.failed_rows = []
 
@@ -107,8 +108,9 @@ class RuleProcessor:
         specific_prefix = 'PCS_SOT'  # Define the specific prefix for SOT values
         
         # Path to the image file
-        image1_path = "RFC/Data Watch - HDMx OOP RFC.png"
-        image2_path = "RFC/Data Watch - TCUI VID Search.png"
+        image1_path = os.path.join(os.path.dirname(__file__), "RFC","Data Watch - HDMx OOP RFC.png")
+        image2_path = os.path.join(os.path.dirname(__file__), "RFC","Data Watch - TCUI VID Search.png")
+
         base64_image1 = get_base64_image(image1_path)
         base64_image2 = get_base64_image(image2_path)
         
@@ -150,7 +152,7 @@ class RuleProcessor:
 
             # Response based on severity
             if severity == 'high':
-                logging.info(f"Row with severity {severity}: all SOT 255: {data_set}")
+                error_logger.warning(f"Row with severity {severity}: all SOT 255: {data_set}")
                 # Subject
                 subject = f"Potential OOP / FM at {tool_id}_{site_id} - Lot: {lot_id} VID: {visual_id}"
                 # Filter the dataset to include only the desired columns
@@ -194,7 +196,7 @@ class RuleProcessor:
                     is_html=True
                 )
             elif severity == 'medium' and data_set.get('curfbin') == '9726':
-                logging.info(f"Row with severity {severity}: curfbin 9726 detected in medium severity row: {data_set}")
+                error_logger.warning(f"Row with severity {severity}: curfbin 9726 detected in medium severity row: {data_set}")
                 # Subject
                 subject = f"Potential OOP / FM at {tool_id}_{site_id} - Lot: {lot_id} VID: {visual_id}"
                 # Filter the dataset to include only the desired columns
@@ -246,6 +248,7 @@ class RuleProcessor:
 
 # Email function
 def send_email_outlook(subject, body, recipients, cc_recipients=None, bcc_recipients=None, is_html=False):
+    print("In send_email_outlook")
     # Initialize COM for current thread
     pythoncom.CoInitialize()
 
@@ -270,6 +273,7 @@ def send_email_outlook(subject, body, recipients, cc_recipients=None, bcc_recipi
 
 # ituff processor function
 def process_log_files(lines, tool_id):
+    print("in process log files")
     all_data_sets = []  # list to store all processed data sets
     dynamic_headers = set()  # keep track of dynamic headers encountered in the log files
 
@@ -410,6 +414,7 @@ def append_failed_rows_to_csv(csv_file_path, failed_rows):
 
 class LogFileHandler(FileSystemEventHandler):
     def __init__(self, log_files_dir, output_csv_path, tool_id):
+        print("in LogFIleHandler init")
         self.log_files_dir = log_files_dir
         self.output_csv_path = output_csv_path
         self.trigger_csv_path = trigger_csv_path
@@ -418,17 +423,20 @@ class LogFileHandler(FileSystemEventHandler):
         self.file_position = 0
 
     def on_modified(self, event):
+        print("in LogFIleHandler on_mod")
         logging.info(f"File modified: {event.src_path}")  # Debug print
         if not event.is_directory and "DomItuffSubscriber_" in event.src_path:
             self.process_new_lines(event.src_path)
 
     def on_created(self, event):
+        print("in LogFIleHandler on_create")
         logging.info(f"File created: {event.src_path}")  # Debug print
         if not event.is_directory and "DomItuffSubscriber_" in event.src_path:
             self.current_file = event.src_path
             self.file_position = 0  # Reset file position since this is a new file
 
     def process_new_lines(self, file_path):
+        print("in LogFIleHandler on_pro")
         logging.info(f"Processing new lines in file: {file_path}")  # Debug print with timestamp
         
         attempts = 3
@@ -474,7 +482,9 @@ class LogFileHandler(FileSystemEventHandler):
         
         
 # Base directory where the HXV folders are located
-base_log_files_dir = r'\\t3file1.png.intel.com\offline_logs\hdmx\ST'
+# base_log_files_dir = r'\\t3file1.png.intel.com\offline_logs\hdmx\ST'
+base_log_files_dir = r'C:\Projects\datawatchLogs\DW_datafile'
+
 
 # List of folder names to monitor
 folders_to_monitor = ['test1', 'test2']
