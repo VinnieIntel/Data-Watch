@@ -9,7 +9,7 @@ CORS(app)  # Enable CORS to allow React to access the API
 
 ############################### HOME ####################################
 # Path to the CSV file
-DATA_PATH = os.path.join(os.path.dirname(__file__), 'data', 'output_2.csv')
+DATA_PATH = os.path.join(os.path.dirname(__file__), 'data', 'Trigger_Data_TEST.csv')
 
 # Route to fetch CSV data
 @app.route('/api/csv', methods=['GET'])
@@ -154,7 +154,10 @@ def get_error_logs():
     if os.path.exists(ERROR_LOG_PATH):
         try:
             logs = group_log_lines(ERROR_LOG_PATH)
-            return jsonify(logs)
+             # Retrieve only the latest 50 groups. If there are fewer, return all. 
+            latest_logs = logs[-50:] if len(logs) >= 1 else logs
+
+            return jsonify(latest_logs)
         except Exception as e:
             return jsonify({"error": str(e)}), 500
     else:
