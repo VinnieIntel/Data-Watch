@@ -82,8 +82,10 @@ const Status = () => {
     }, []);
 
     return (
+        <div>
+        <h1>Tool Status</h1>
         <OuterDiv>
-            <h1>Tool Status</h1>
+            
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
@@ -119,6 +121,7 @@ const Status = () => {
                 </InnerDiv>
             )}
         </OuterDiv>
+        </div>
     );
 };
 

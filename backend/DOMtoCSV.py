@@ -70,7 +70,7 @@ error_logger.addHandler(error_handler)
 # logging.info("This is an informational message.") #  in main log only
 # logging.error("This is a general error message.")  # in main log only
 # logging.warning("This is a warning message!") #  in main log only
-# error_logger.error("Critical system failure detected!")  # in both main and error.log
+error_logger.error("TEST: Critical system failure detected!")  # in both main and error.log
 # error_logger.warning("Disk space running low!") # in both main and error.log
 
 
