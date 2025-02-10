@@ -1,4 +1,6 @@
 :root {
+  --background-color: #242424;
+  --component-background-color: #242424;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   height: 100%; 
@@ -59,8 +61,10 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
+    --background-color: #ffffff;
+    --component-background-color: #ffffff;
     color: #213547;
-    background-color: #ffffff;
+    background-color: var(--background-color);
   }
   a:hover {
     color: #747bff;
@@ -69,3 +73,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
