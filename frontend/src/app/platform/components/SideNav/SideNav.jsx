@@ -11,7 +11,7 @@ const NavLinkContainer = styled.div`
     padding-right: 1rem;
     border-right: 5px solid ${COLORS.lightGreen};
     margin-top:30px;
-    background-color: ${COLORS.black};
+    background-color: var(--component-background-color);
 `;
 
 const StyledNavLink = styled(NavLink)`

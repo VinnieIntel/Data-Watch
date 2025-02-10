@@ -57,20 +57,22 @@ const DownloadInnerDiv = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1px solid ${COLORS.lightGreen};
+    border: 2px solid ${COLORS.lightGreen};
     padding: 10px;
     border-radius: 15px;
+    background-color:${COLORS.lightestGreen};
 `;
 
 const GreenWords = styled.p`
-    color: ${COLORS.lightGreen};
+    color: ${COLORS.forestGreen};
     font-size: ${FONTSIZE.small};
     margin-left: 10px;
+    font-weight: bold;
 `;
 
 const StyledButton = styled(Button)`
     && {
-        color: ${COLORS.lightGreen};
+        color: ${COLORS.forestGreen};
         &:hover {
             color: ${COLORS.white};
         }

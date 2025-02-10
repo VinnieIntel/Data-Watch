@@ -11,7 +11,7 @@ const RootContainer = styled.div`
     justify-content: space-between;
     border-bottom: 5px solid ${COLORS.lightGreen};
     padding: 30px 60px;
-    background-color: ${COLORS.black};
+    background-color: var(--component-background-color);
 `;
 
 const AuthContainer = styled.div`
