@@ -45,7 +45,24 @@ const StyledTd = styled.td`
 
 const StatusCell = styled(StyledTd)`
     font-weight: bold;
-    color: ${props => (props.$status === 'online' ? COLORS.darkSeaGreen : 'red')};
+    color: ${props => {
+        switch (props.$status) {
+            case 'PROD':
+                return COLORS.darkSeaGreen;
+            case 'STANDBY':
+                return COLORS.yellow;
+            case 'Unknown':
+                return 'grey';
+            case 'PM':
+                return COLORS.hotPink;
+            case 'BAGGED':
+                return COLORS.brightGrey;
+            case '-':
+                return 'inherit';
+            default:
+                return 'red';
+        }
+    }};
 `;
 
 const Status = () => {
@@ -104,7 +121,7 @@ const Status = () => {
                             {data.map((row, rowIndex) => (
                                 <tr key={rowIndex}>
                                     {columns.map((col, colIndex) => (
-                                        col === 'Status' ? (
+                                        col === 'STATUS' ? (
                                             <StatusCell key={colIndex} $status={row[col]}>
                                                 {row[col]}
                                             </StatusCell>

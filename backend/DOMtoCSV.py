@@ -487,8 +487,8 @@ base_log_files_dir = r'C:\Projects\datawatchLogs\DW_datafile'
 
 
 # List of folder names to monitor
-folders_to_monitor = ['test1', 'test2']
-#folders_to_monitor = ['HXV001','HXV002','HXV003','HXV004','HXV005','HXV006','HXV007','HXV008','HXV009','HXV010','HXV011','HXV012','HXV013','HXV015','HXV016','HXV017','HXV201','HXV202','HXV203','HXV204','HXV205','HXV206','HXV207','HXV208','HXV209','HXV210','HMV801','HMV802','HMV803','HMV804','HMV805','HMV806','HMV807']
+folders_to_monitor = ['HXV001', 'HXV002']
+# folders_to_monitor_prod = ['HXV001','HXV002','HXV003','HXV004','HXV005','HXV006','HXV007','HXV008','HXV009','HXV010','HXV011','HXV012','HXV013','HXV015','HXV016','HXV017','HXV201','HXV202','HXV203','HXV204','HXV205','HXV206','HXV207','HXV208','HXV209','HXV210','HMV801','HMV802','HMV803','HMV804','HMV805','HMV806','HMV807']
 
 # Define the output CSV file path (single file for all folders)
 output_csv_path = r'C:\Projects\datawatchUI\backend\data\Raw_Data_TEST.csv'
