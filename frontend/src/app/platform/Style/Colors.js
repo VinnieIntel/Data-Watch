@@ -3,6 +3,7 @@ const COLORS = {
     darkGrey: '#999999',
     grey: '#D2D2D2',
     lightGrey: '#F2F2F2',
+    brightGrey: '#91a3b0',
     red: '#D2051E',
     white: '#FFFFFF',
     lightBlue:'#6495ed',
@@ -15,6 +16,8 @@ const COLORS = {
     lightGreen:'#90ee90',
     lightestGreen:'#e9ffdb',
     red:'#dc2626',
+    yellow :'#eed202',
+    hotPink: '#ff69b4'
 };
 
 export default COLORS;

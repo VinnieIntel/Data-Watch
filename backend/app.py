@@ -46,7 +46,7 @@ def download_full_csv():
 
 ############################### STATUS ####################################
 # Path to the CSV file
-STATUS_PATH = os.path.join(os.path.dirname(__file__), 'data', 'status.csv')
+STATUS_PATH = os.path.join(os.path.dirname(__file__), 'data', 'toolstatus_show.csv')
 
 # Route to fetch status data
 @app.route('/api/status', methods=['GET'])
