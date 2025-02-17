@@ -1,82 +1,102 @@
-<h1>Setup Guide</h1>
+*Setup Guide*
 
-<h2>Prerequisites</h2>
-<ul>
-  <li>Git</li>
-  <li>Node.js</li>
-  <li>npm</li>
-</ul>
+# Prerequisites
+- Git
+- Node.js
+- npm
 
-<p>>> Download it here if not done before: <a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+Download it here if not done before: https://nodejs.org/en/
 
+# 1. Clone the Repository
 
-<h2>1. Clone the Repository</h2>
-<p>First, clone this repository to your local machine:</p>
-<pre><code>git clone https://github.com/VinnieIntel/Data-Watch.git
+First, clone this repository to your local machine:
+```
+git clone https://github.com/VinnieIntel/Data-Watch.git
 cd Data-Watch
-</code></pre>
+```
+<br/>
 
-<h2>2. Backend Setup</h2>
+# 2. Backend Setup
 
-<h3>2.1 Create a Virtual Environment</h3>
-<p>A virtual environment is recommended to manage dependencies.</p>
+## 2.1 Create a Virtual Environment
 
-<p>For Windows (Command Prompt or PowerShell):</p>
-<pre><code>python -m venv .venv
+A virtual environment is recommended to manage dependencies.
+
+For Windows (Command Prompt or PowerShell):
+
+```
+python -m venv .venv
 .venv\Scripts\activate
-</code></pre>
+```
 
-<p>For macOS/Linux (Terminal):</p>
-<pre><code>python3 -m venv .venv
+For macOS/Linux (Terminal):
+```
+python3 -m venv .venv
 source .venv/bin/activate
-</code></pre>
+```
 
-<h3>2.2 Install Dependencies</h3>
-<p>Once the virtual environment is activated, install the required dependencies:</p>
-<pre><code>cd backend
+## 2.2 Install Dependencies
+
+Once the virtual environment is activated, install the required dependencies:
+
+```
+cd backend
 pip install -r requirements.txt
-</code></pre>
+```
 
-<h3>2.3 Verify Installation</h3>
-<p>Check if dependencies are installed correctly:</p>
-<pre><code>python -m flask --version  # Example: Verify Flask installation
-</code></pre>
+## 2.3 Verify Installation
 
-<h3>2.4 Running the Application</h3>
-<p><em>To start the application:</em></p>
-<pre><code>python app.py
-</code></pre>
+Check if dependencies are installed correctly:
+```
+python -m flask --version  # Example: Verify Flask installation
+```
 
-<h3>2.5 Deactivate the Virtual Environment</h3>
-<p>When you're done, deactivate the virtual environment:</p>
-<pre><code>deactivate
-</code></pre>
+## 2.4 Running the Application
 
-<h2>3. Frontend Setup</h2>
+_To start the application:_
+```
+python app.py
+```
 
-<p>The frontend is built using React.js and requires npm for dependency management.</p>
 
-<h3>Install Frontend Dependencies</h3>
-<p>Navigate to the frontend directory and install dependencies:</p>
-<pre><code>cd frontend
+## 2.5 Deactivate the Virtual Environment
+
+When you're done, deactivate the virtual environment:
+
+```
+deactivate
+```
+
+<br/>
+
+# 3. Frontend Setup
+The frontend is built using React.js and requires npm for dependency management.
+
+_Install Frontend Dependencies_
+Navigate to the frontend directory and install dependencies:
+```
+cd frontend
 npm install
-</code></pre>
+```
+_Running the Frontend_
+Start the frontend development server:
+```
+npm run dev
+```
+This will launch the application in your default web browser.
 
-<h3>Running the Frontend</h3>
-<p>Start the frontend development server:</p>
-<pre><code>npm run dev
-</code></pre>
-<p>This will launch the application in your default web browser.</p>
+<br/>
 
-<h2>Additional Notes</h2>
-<ul>
-  <li>If you install new dependencies for the backend, run:
-    <pre><code>pip freeze > requirements.txt
-    </code></pre>
-    and commit the updated requirements.txt.
-  </li>
-  <li>If you install new dependencies for the frontend, update package.json and commit the changes.</li>
-  <li>.venv/ is excluded from Git using .gitignore to prevent unnecessary file uploads.</li>
-</ul>
+# Additional Notes
 
-<h3>Happy coding! :) ~Vinnie</h3>
+- If you install new dependencies for the backend, run:
+```
+pip freeze > requirements.txt
+```
+and commit the updated requirements.txt.
+
+- If you install new dependencies for the frontend, update package.json and commit the changes.
+
+- .venv/ is excluded from Git using .gitignore to prevent unnecessary file uploads.
+
+#### Happy coding! :) ~Vinnie
