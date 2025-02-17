@@ -1,100 +1,82 @@
-*Setup Guide*
+<h1>Setup Guide</h1>
 
-# Prerequisites
-- Git
-- Node.js
-- npm
+<h2>Prerequisites</h2>
+<ul>
+  <li>Git</li>
+  <li>Node.js</li>
+  <li>npm</li>
+</ul>
 
-# 1. Clone the Repository
+<p>>> Download it here if not done before: <a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
 
-First, clone this repository to your local machine:
-```
-git clone https://github.com/VinnieIntel/Data-Watch.git
+
+<h2>1. Clone the Repository</h2>
+<p>First, clone this repository to your local machine:</p>
+<pre><code>git clone https://github.com/VinnieIntel/Data-Watch.git
 cd Data-Watch
-```
-<br/>
+</code></pre>
 
-# 2. Backend Setup
+<h2>2. Backend Setup</h2>
 
-## 2.1 Create a Virtual Environment
+<h3>2.1 Create a Virtual Environment</h3>
+<p>A virtual environment is recommended to manage dependencies.</p>
 
-A virtual environment is recommended to manage dependencies.
-
-For Windows (Command Prompt or PowerShell):
-
-```
-python -m venv .venv
+<p>For Windows (Command Prompt or PowerShell):</p>
+<pre><code>python -m venv .venv
 .venv\Scripts\activate
-```
+</code></pre>
 
-For macOS/Linux (Terminal):
-```
-python3 -m venv .venv
+<p>For macOS/Linux (Terminal):</p>
+<pre><code>python3 -m venv .venv
 source .venv/bin/activate
-```
+</code></pre>
 
-## 2.2 Install Dependencies
-
-Once the virtual environment is activated, install the required dependencies:
-
-```
+<h3>2.2 Install Dependencies</h3>
+<p>Once the virtual environment is activated, install the required dependencies:</p>
+<pre><code>cd backend
 pip install -r requirements.txt
-```
+</code></pre>
 
-## 2.3 Verify Installation
+<h3>2.3 Verify Installation</h3>
+<p>Check if dependencies are installed correctly:</p>
+<pre><code>python -m flask --version  # Example: Verify Flask installation
+</code></pre>
 
-Check if dependencies are installed correctly:
-```
-python -m flask --version  # Example: Verify Flask installation
-```
+<h3>2.4 Running the Application</h3>
+<p><em>To start the application:</em></p>
+<pre><code>python app.py
+</code></pre>
 
-## 2.4 Running the Application
+<h3>2.5 Deactivate the Virtual Environment</h3>
+<p>When you're done, deactivate the virtual environment:</p>
+<pre><code>deactivate
+</code></pre>
 
-_To start the application:_
-```
-cd backend
-python app.py
-```
+<h2>3. Frontend Setup</h2>
 
+<p>The frontend is built using React.js and requires npm for dependency management.</p>
 
-## 2.5 Deactivate the Virtual Environment
-
-When you're done, deactivate the virtual environment:
-
-```
-deactivate
-```
-
-<br/>
-
-# 3. Frontend Setup
-The frontend is built using React.js and requires npm for dependency management.
-
-_Install Frontend Dependencies_
-Navigate to the frontend directory and install dependencies:
-```
-cd frontend
+<h3>Install Frontend Dependencies</h3>
+<p>Navigate to the frontend directory and install dependencies:</p>
+<pre><code>cd frontend
 npm install
-```
-_Running the Frontend_
-Start the frontend development server:
-```
-npm run dev
-```
-This will launch the application in your default web browser.
+</code></pre>
 
-<br/>
+<h3>Running the Frontend</h3>
+<p>Start the frontend development server:</p>
+<pre><code>npm run dev
+</code></pre>
+<p>This will launch the application in your default web browser.</p>
 
-# Additional Notes
+<h2>Additional Notes</h2>
+<ul>
+  <li>If you install new dependencies for the backend, run:
+    <pre><code>pip freeze > requirements.txt
+    </code></pre>
+    and commit the updated requirements.txt.
+  </li>
+  <li>If you install new dependencies for the frontend, update package.json and commit the changes.</li>
+  <li>.venv/ is excluded from Git using .gitignore to prevent unnecessary file uploads.</li>
+</ul>
 
-- If you install new dependencies for the backend, run:
-```
-pip freeze > requirements.txt
-```
-and commit the updated requirements.txt.
-
-- If you install new dependencies for the frontend, update package.json and commit the changes.
-
-- .venv/ is excluded from Git using .gitignore to prevent unnecessary file uploads.
-
-### Happy coding! :) ~Vinnie
+<h3>Happy coding! :) ~Vinnie</h3>
