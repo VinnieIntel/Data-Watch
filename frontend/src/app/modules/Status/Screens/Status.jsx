@@ -48,7 +48,7 @@ const StatusCell = styled(StyledTd)`
     color: ${props => {
         switch (props.$status) {
             case 'PROD':
-                return COLORS.darkSeaGreen;
+                return COLORS.lightGreen;
             case 'STANDBY':
                 return COLORS.yellow;
             case 'Unknown':
