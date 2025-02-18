@@ -26,15 +26,15 @@ For Windows (Command Prompt or PowerShell):
 
 ```
 cd backend
-python -m venv .venv
-.venv\Scripts\activate
+python -m venv venv
+venv\Scripts\activate
 ```
 
 For macOS/Linux (Terminal):
 ```
 cd backend
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 ## 2.2 Install Dependencies
