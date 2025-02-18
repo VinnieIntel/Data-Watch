@@ -44,6 +44,12 @@ Once the virtual environment is activated, install the required dependencies:
 ```
 pip install -r requirements.txt
 ```
+If meet > ERROR: Could not find a version that satisfies the requirement, 
+add 
+```
+--index-url https://pypi.org/simple
+```
+behind the cmd.
 
 ## 2.3 Verify Installation
 
