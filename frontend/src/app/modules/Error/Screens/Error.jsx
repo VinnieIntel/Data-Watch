@@ -51,7 +51,7 @@ const Error = () => {
     // Function to fetch logs from the backend API.
     const fetchLogs = async () => {
         try {
-        const response = await axios.get('http://localhost:5000/api/errors');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/errors`);
         setLogs(response.data);
         setLoading(false);
         } catch (err) {

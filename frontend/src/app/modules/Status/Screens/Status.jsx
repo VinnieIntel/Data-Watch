@@ -74,7 +74,7 @@ const Status = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:5000/api/status');
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/status`);
                 if (!response.ok) {
                     throw new Error(`Error: ${response.statusText}`);
                 }

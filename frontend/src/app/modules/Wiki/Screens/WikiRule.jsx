@@ -37,7 +37,7 @@ const WikiRule = () => {
         // Fetch the rule content from the backend
         const fetchRule = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/rules/${ruleId}`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/rules/${ruleId}`);
                 if (!response.ok) {
                     throw new Error(`Error: ${response.statusText}`);
                 }

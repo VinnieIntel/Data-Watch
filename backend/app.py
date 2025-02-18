@@ -6,6 +6,9 @@ import re
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS to allow React to access the API
+@app.route('/')
+def home():
+    return "Hello, World!"
 
 ############################### HOME ####################################
 # Path to the CSV file

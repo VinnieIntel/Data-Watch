@@ -85,7 +85,7 @@ const HomePage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/api/csv')
+        fetch(`${import.meta.env.VITE_API_URL}/api/csv`)
             .then(response => response.json())
             .then(result => {
                 setColumns(result.columns);
@@ -139,7 +139,7 @@ const HomePage = () => {
             <DownloadInnerDiv>
                 <GreenWords>Full CSV file</GreenWords>
                 <a
-                    href="http://localhost:5000/api/download/full-csv"
+                    href={`${import.meta.env.VITE_API_URL}/api/download/full-csv`}
                     download="Full_CSV"
                     target="_blank"
                     rel="noreferrer"

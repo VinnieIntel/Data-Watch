@@ -83,7 +83,7 @@ const Wiki = () => {
         // Fetch the list of rules from the backend
         const fetchRules = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/rules');
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/rules`);
                 if (!response.ok) {
                     throw new Error(`Error: ${response.statusText}`);
                 }
@@ -102,7 +102,7 @@ const Wiki = () => {
         const fetchRule = async () => {
             if (ruleId) {
                 try {
-                    const response = await fetch(`http://localhost:5000/api/rules/${ruleId}`);
+                    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/rules/${ruleId}`);
                     if (!response.ok) {
                         throw new Error(`Error: ${response.statusText}`);
                     }
