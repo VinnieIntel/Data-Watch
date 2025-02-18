@@ -25,12 +25,14 @@ A virtual environment is recommended to manage dependencies.
 For Windows (Command Prompt or PowerShell):
 
 ```
+cd backend
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
 For macOS/Linux (Terminal):
 ```
+cd backend
 python3 -m venv .venv
 source .venv/bin/activate
 ```
@@ -40,7 +42,6 @@ source .venv/bin/activate
 Once the virtual environment is activated, install the required dependencies:
 
 ```
-cd backend
 pip install -r requirements.txt
 ```
 
