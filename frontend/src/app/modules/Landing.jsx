@@ -39,6 +39,6 @@ const Landing = () => {
         </div>
     );
 };
-console.log("API URL:", import.meta.env.VITE_API_URL);
+console.log("API URL:", import.meta.env.VITE_API_URL); //Check the API Integration by pressing F12 > console to see if there is the URL there, on the landing page
 
 export default Landing;

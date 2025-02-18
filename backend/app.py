@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS to allow React to access the API
 @app.route('/')
 def home():
-    return "Hello, World!"
+    return "Hello, This is the backend of Data Watch! :)"
 
 ############################### HOME ####################################
 # Path to the CSV file
