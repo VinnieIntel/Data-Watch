@@ -23,8 +23,19 @@ current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 # Set the working directory to the directory containing the script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+###################### Set file location ##########################
+script_dir = os.path.dirname(__file__)
+log_dir = os.path.join(script_dir, "data", "logfiles")
+os.makedirs(log_dir, exist_ok=True)
+log_file_path = os.path.join(log_dir, "logfile_DOMtoCSV.log")
+# Python logging
+# log_file_path = r'C:\Users\soonthia\Python projects\DOM ituff processor\log.txt'
+# log_dir = r"C:\Projects\DataWatchUI\backend\data\logfiles" #Vinnie's PC
 
-# Define fixed headers
+print("This is the output printed from DOMtoCSV.py")
+logging.info("This is the logging from DOMtoCSV.py")
+
+######################  Define fixed headers ###################### 
 fixed_headers =['tool_id', 'lot_id']
 # fixed_headers =['tool_id', 'cell_id']
 # Define type1 prefix
@@ -33,14 +44,8 @@ fixed_headers =['tool_id', 'lot_id']
 # type2_prefixes = ['tname_PCS_SOT']
 type2_prefixes = 'tname_'
 
-# Python logging
-# log_file_path = r'C:\Users\soonthia\Python projects\DOM ituff processor\log.txt'
-log_dir = r"C:\Projects\DataWatchUI\backend\data\logfiles"
-os.makedirs(log_dir, exist_ok=True)
 
-log_file_path = os.path.join(log_dir, "logfile_DOMtoCSV.log")
-
-# Common log format
+######################  Common log format ###################### 
 log_format = '%(asctime)s - %(levelname)s - %(message)s'
 
 logging.basicConfig(
@@ -66,7 +71,7 @@ error_logger.addHandler(error_handler)
 
 
 
-# # --- Example Usage ---
+####################### --- Example Usage --- ###################### 
 # logging.info("This is an informational message.") #  in main log only
 # logging.error("This is a general error message.")  # in main log only
 # logging.warning("This is a warning message!") #  in main log only
@@ -483,11 +488,12 @@ class LogFileHandler(FileSystemEventHandler):
         
 # Base directory where the HXV folders are located
 # base_log_files_dir = r'\\t3file1.png.intel.com\offline_logs\hdmx\ST'
-base_log_files_dir = r'C:\Projects\datawatchLogs\DW_datafile'
+base_log_files_dir = r'C:\VinnieProjects\offline_logs'
+# base_log_files_dir = r'C:\Projects\datawatchLogs\DW_datafile'
 
 
 # List of folder names to monitor
-folders_to_monitor = ['HXV001', 'HXV002']
+folders_to_monitor = ['test1', 'test2']
 # folders_to_monitor_prod = ['HXV001','HXV002','HXV003','HXV004','HXV005','HXV006','HXV007','HXV008','HXV009','HXV010','HXV011','HXV012','HXV013','HXV015','HXV016','HXV017','HXV201','HXV202','HXV203','HXV204','HXV205','HXV206','HXV207','HXV208','HXV209','HXV210','HMV801','HMV802','HMV803','HMV804','HMV805','HMV806','HMV807']
 
 # Define the output CSV file path (single file for all folders)
