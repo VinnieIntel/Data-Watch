@@ -14,20 +14,20 @@ def home():
 script_dir = os.path.dirname(__file__)
 
 ############################### BACKEND TRIGGER ####################################
-ps1_script = os.path.join(script_dir, "TriggerDOMtoCSV.ps1")
-print("This is the output from app.py")
-print(ps1_script)
+# ps1_script = os.path.join(script_dir, "TriggerDOMtoCSV.ps1")
+# print("This is the output from app.py")
+# print(ps1_script)
 
-log_file = os.path.join(script_dir, "data","logfiles","script_output.log")
-log_dir = os.path.dirname(log_file)
-os.makedirs(log_dir, exist_ok=True)
+# log_file = os.path.join(script_dir, "data","logfiles","script_output.log")
+# log_dir = os.path.dirname(log_file)
+# os.makedirs(log_dir, exist_ok=True)
 
-with open(log_file, "w") as log:
-    print("This logs the run of ps1 to call DOMtoCSV.py from app.py")
-    process = subprocess.Popen(
-        ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File", ps1_script],
-        stdout=log, stderr=log, shell=True
-    )
+# with open(log_file, "w") as log:
+#     print("This logs the run of ps1 to call DOMtoCSV.py from app.py")
+#     process = subprocess.Popen(
+#         ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File", ps1_script],
+#         stdout=log, stderr=log
+#     )
 
 
 ############################### HOME ####################################
