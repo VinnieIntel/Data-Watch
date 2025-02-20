@@ -3,12 +3,32 @@ from flask_cors import CORS
 import os
 import csv
 import re
+import subprocess
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS to allow React to access the API
 @app.route('/')
 def home():
     return "Hello, This is the backend of Data Watch! :)"
+
+script_dir = os.path.dirname(__file__)
+
+############################### BACKEND TRIGGER ####################################
+ps1_script = os.path.join(script_dir, "TriggerDOMtoCSV.ps1")
+print("This is the output from app.py")
+print(ps1_script)
+
+log_file = os.path.join(script_dir, "data","logfiles","script_output.log")
+log_dir = os.path.dirname(log_file)
+os.makedirs(log_dir, exist_ok=True)
+
+with open(log_file, "w") as log:
+    print("This logs the run of ps1 to call DOMtoCSV.py from app.py")
+    process = subprocess.Popen(
+        ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File", ps1_script],
+        stdout=log, stderr=log, shell=True
+    )
+
 
 ############################### HOME ####################################
 # Path to the CSV file

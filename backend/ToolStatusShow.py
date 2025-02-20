@@ -1,10 +1,16 @@
 import pandas as pd
 import os
+import logging
 
 script_dir = os.path.dirname(__file__)
 data_path = os.path.join(script_dir, 'data')
 status_full_csv_path = os.path.join(data_path, "toolstatus_full.csv")
 status_show_csv_path = os.path.join(data_path, "toolstatus_show.csv")
+log_path = os.path.join (data_path, "logfiles", 'logfile_toolstatus.log')
+
+logging.basicConfig(filename=log_path, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.info("ToolStatusShow.py run!")
+
 tools = [
     'HXV001', 'HXV002', 'HXV003', 'HXV004', 'HXV005', 'HXV006', 'HXV007', 'HXV008', 'HXV009', 'HXV010',
     'HXV011', 'HXV012', 'HXV013', 'HXV015', 'HXV016', 'HXV017', 'HXV201', 'HXV202', 'HXV203', 'HXV204',
@@ -24,3 +30,5 @@ df_result['TIMESTAMP'] = df_result['TIMESTAMP'].fillna('-')
 
 # Save the result to a new CSV file
 df_result.to_csv(status_show_csv_path, index=False)
+
+logging.info("Done updating tool status!")
