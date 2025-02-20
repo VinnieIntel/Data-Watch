@@ -3,7 +3,7 @@ $pythonPath = "C:\VinnieProjects\Data-Watch\backend\venv\Scripts\python.exe"
 
 $script1 = "C:\VinnieProjects\Data-Watch\backend\DOMtoCSV.py"
 # $script2 = "C:\VinnieProjects\Data-Watch\backend\ToolStatusFull.py"
-$logPath = "C:\VinnieProjects\Data-Watch\backend\data\logfiles\ps_script.log"
+$logPath = "C:\VinnieProjects\Data-Watch\backend\data\logfiles\ps_script_DOMtoCSV.log"
 Add-Content -Path $logPath -Value "$(Get-Date): This is the logging from ps1."
 
 # Run the Python script
