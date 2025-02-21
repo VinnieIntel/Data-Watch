@@ -47,16 +47,30 @@ const Error = () => {
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [fetchError, setFetchError] = useState(null);
+    const [lastModified, setLastModified] = useState(null);
 
     // Function to fetch logs from the backend API.
     const fetchLogs = async () => {
         try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/errors`);
-        setLogs(response.data);
-        setLoading(false);
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/errors`);
+          setLogs(response.data);
+        
+          // Fetch last update error time
+          const lastModifiedResponse = await fetch(`${import.meta.env.VITE_API_URL}/get_last_update_error`);
+          const lastModifiedData = await lastModifiedResponse.json();
+          if (lastModifiedData.last_modified) {
+              // Convert Unix timestamp to readable format
+              const formattedDate = new Date(lastModifiedData.last_modified * 1000).toLocaleString();
+              setLastModified(formattedDate);
+          } else {
+              setLastModified("File not found");
+          }
+
+          setLoading(false);
         } catch (err) {
-        setFetchError('Unable to fetch logs. Please check the backend.');
-        setLoading(false);
+          console.error('Error fetching data:', err);
+          setFetchError('Unable to fetch logs. Please check the backend.');
+          setLoading(false);
         }
     };
 
@@ -70,6 +84,7 @@ const Error = () => {
     return (
         <div>
         <h1>Error Logs</h1>
+        <p><strong>Last Updated:</strong> {lastModified ? lastModified : "Loading..."}</p>
         <Container>
           
           {loading ? (

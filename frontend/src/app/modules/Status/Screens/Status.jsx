@@ -74,6 +74,7 @@ const Status = () => {
 
         const fetchData = async () => {
             try {
+                // Fetch status data
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/status`);
                 if (!response.ok) {
                     throw new Error(`Error: ${response.statusText}`);
@@ -87,6 +88,18 @@ const Status = () => {
                 } else {
                     setError('No data available');
                 }
+
+            // Fetch last modified time
+            const lastModifiedResponse = await fetch(`${import.meta.env.VITE_API_URL}/get_last_modified`);
+            const lastModifiedData = await lastModifiedResponse.json();
+            if (lastModifiedData.last_modified) {
+                // Convert Unix timestamp to readable format
+                const formattedDate = new Date(lastModifiedData.last_modified * 1000).toLocaleString();
+                setLastModified(formattedDate);
+            } else {
+                setLastModified("File not found");
+            }
+
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -97,28 +110,10 @@ const Status = () => {
 
          useEffect(() => {
         fetchData();
-        const interval = setInterval(fetchData, 60000); // Refresh every 60 seconds
+        const interval = setInterval(fetchData, 60000); // Refresh every 60 seconds (1minute)
         return () => clearInterval(interval);
     }, []);
 
-    useEffect(() => {
-            // Fetch last modified time from Flask API
-            fetch(`${import.meta.env.VITE_API_URL}/get_last_modified`)
-              .then((response) => response.json())
-              .then((data) => {
-                if (data.last_modified) {
-                  // Convert Unix timestamp to readable format
-                  const formattedDate = new Date(data.last_modified * 1000).toLocaleString();
-                  setLastModified(formattedDate);
-                } else {
-                  setLastModified("File not found");
-                }
-              })
-              .catch((error) => {
-                console.error("Error fetching last modified date:", error);
-                setLastModified("Error fetching data");
-              });
-          }, []);
 
     return (
         <div>

@@ -85,7 +85,7 @@ def get_status_data():
 
 
 @app.route('/get_last_modified', methods=['GET'])
-def get_last_modified():
+def get_last_status_modified():
     
     if os.path.exists(STATUS_CSV):
         last_modified_time = os.path.getmtime(STATUS_CSV)  # Get last modified timestamp
@@ -148,7 +148,7 @@ def download_rule_python():
 ############################### ERROR ####################################
 
 # Path to the Log file for Error Page
-ERROR_LOG_PATH = os.path.join(os.path.dirname(__file__),'data','logfiles','error.log')
+ERROR_LOG_PATH = os.path.join(DATA_FOLDER,'logfiles','error.log')
 
 def group_log_lines(file_path):
     """
@@ -189,7 +189,16 @@ def get_error_logs():
             return jsonify({"error": str(e)}), 500
     else:
         return jsonify({"message": "No error log found."}), 404
+    
 
+@app.route('/get_last_update_error', methods=['GET'])
+def get_last_error_update():
+    
+    if os.path.exists(ERROR_LOG_PATH):
+        last_modified_time = os.path.getmtime(ERROR_LOG_PATH)  # Get last modified timestamp
+        return jsonify({"last_modified": last_modified_time})
+    else:
+        return jsonify({"error": "File not found"}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
