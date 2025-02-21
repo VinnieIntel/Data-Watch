@@ -71,7 +71,6 @@ const Status = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/status`);
@@ -95,7 +94,10 @@ const Status = () => {
             }
         };
 
+         useEffect(() => {
         fetchData();
+        const interval = setInterval(fetchData, 60000); // Refresh every 60 seconds
+        return () => clearInterval(interval);
     }, []);
 
     return (
