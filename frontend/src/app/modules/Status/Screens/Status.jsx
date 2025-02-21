@@ -66,6 +66,7 @@ const StatusCell = styled(StyledTd)`
 `;
 
 const Status = () => {
+    const [lastModified, setLastModified] = useState(null);
     const [columns, setColumns] = useState([]);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -100,9 +101,29 @@ const Status = () => {
         return () => clearInterval(interval);
     }, []);
 
+    useEffect(() => {
+            // Fetch last modified time from Flask API
+            fetch(`${import.meta.env.VITE_API_URL}/get_last_modified`)
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.last_modified) {
+                  // Convert Unix timestamp to readable format
+                  const formattedDate = new Date(data.last_modified * 1000).toLocaleString();
+                  setLastModified(formattedDate);
+                } else {
+                  setLastModified("File not found");
+                }
+              })
+              .catch((error) => {
+                console.error("Error fetching last modified date:", error);
+                setLastModified("Error fetching data");
+              });
+          }, []);
+
     return (
         <div>
         <h1>Tool Status</h1>
+        <p><strong>Last Updated:</strong> {lastModified ? lastModified : "Loading..."}</p>
         <OuterDiv>
             
             {loading ? (

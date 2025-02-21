@@ -102,7 +102,7 @@ const Wiki = () => {
         const fetchRule = async () => {
             if (ruleId) {
                 try {
-                    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/rules/${ruleId}`);
+                    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/rules/${ruleId}`);
                     if (!response.ok) {
                         throw new Error(`Error: ${response.statusText}`);
                     }

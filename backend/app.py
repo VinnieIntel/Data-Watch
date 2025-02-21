@@ -11,8 +11,7 @@ CORS(app)  # Enable CORS to allow React to access the API
 def home():
     return "Hello, This is the backend of Data Watch! :)"
 
-script_dir = os.path.dirname(__file__)
-
+BACKEND_PATH = os.path.dirname(__file__)
 ############################### BACKEND TRIGGER ####################################
 # ps1_script = os.path.join(script_dir, "TriggerDOMtoCSV.ps1")
 # print("This is the output from app.py")
@@ -32,7 +31,7 @@ script_dir = os.path.dirname(__file__)
 
 ############################### HOME ####################################
 # Path to the CSV file
-DATA_PATH = os.path.join(os.path.dirname(__file__), 'data', 'Trigger_Data_TEST.csv')
+DATA_PATH = os.path.join(BACKEND_PATH, 'data', 'Trigger_Data_TEST.csv')
 
 # Route to fetch CSV data
 @app.route('/api/csv', methods=['GET'])
@@ -48,20 +47,20 @@ def get_csv_data():
         return jsonify({"error": str(e)}), 500
 
 # Define the path to the backend folder containing the full csv file
-BACKEND_FOLDER = os.path.join(os.getcwd(), 'data')
-print(BACKEND_FOLDER)
+DATA_FOLDER = os.path.join(BACKEND_PATH, 'data')
+print(f'data folder: {DATA_FOLDER}')
 # Route to serve RuleCreation.py for download
 @app.route('/api/download/full-csv', methods=['GET'])
 def download_full_csv():
     try:
         # Check if the file exists
         file_name = "output_2.csv"
-        file_path = os.path.join(BACKEND_FOLDER, file_name)
+        file_path = os.path.join(DATA_FOLDER, file_name)
         if not os.path.exists(file_path):
             return jsonify({"error": "File not found"}), 404
         
         # Serve the file
-        return send_from_directory(BACKEND_FOLDER, file_name, as_attachment=True)
+        return send_from_directory(DATA_FOLDER, file_name, as_attachment=True)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
@@ -69,14 +68,14 @@ def download_full_csv():
 
 ############################### STATUS ####################################
 # Path to the CSV file
-STATUS_PATH = os.path.join(os.path.dirname(__file__), 'data', 'toolstatus_show.csv')
+STATUS_CSV = os.path.join(DATA_FOLDER, 'toolstatus_show.csv')
 
 # Route to fetch status data
 @app.route('/api/status', methods=['GET'])
 def get_status_data():
     try:
         # Read CSV and convert to a list of dictionaries
-        with open(STATUS_PATH, 'r') as csvfile:
+        with open(STATUS_CSV, 'r') as csvfile:
             reader = csv.DictReader(csvfile)
             fieldnames = reader.fieldnames
             data = list(reader)
@@ -84,9 +83,19 @@ def get_status_data():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+@app.route('/get_last_modified', methods=['GET'])
+def get_last_modified():
+    
+    if os.path.exists(STATUS_CSV):
+        last_modified_time = os.path.getmtime(STATUS_CSV)  # Get last modified timestamp
+        return jsonify({"last_modified": last_modified_time})
+    else:
+        return jsonify({"error": "File not found"}), 404
+    
 ############################### WIKI ####################################
 # Path to the directory containing your text files
-TEXT_FILES_DIR = os.path.join(os.getcwd(), 'data', 'rules')
+TEXT_FILES_DIR = os.path.join(DATA_FOLDER, 'rules')
 
 
 # Route to fetch a list of all available rule text files
@@ -119,12 +128,7 @@ def get_rule(rule_id):
         return jsonify({"rule_id": rule_id, "content": content})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
-
-# Define the path to the backend folder containing the RuleCreation.py
-BACKEND_FOLDER = os.path.join(os.getcwd(), 'data')
-print(BACKEND_FOLDER)
+    
 
 # Route to serve RuleCreation.py for download
 @app.route('/api/download/rule-python', methods=['GET'])
@@ -132,12 +136,12 @@ def download_rule_python():
     try:
         # Check if the file exists
         file_name = "RuleCreation.py"
-        file_path = os.path.join(BACKEND_FOLDER, file_name)
+        file_path = os.path.join(BACKEND_PATH, file_name)
         if not os.path.exists(file_path):
             return jsonify({"error": "File not found"}), 404
         
         # Serve the file
-        return send_from_directory(BACKEND_FOLDER, file_name, as_attachment=True, mimetype='text/x-python')
+        return send_from_directory(BACKEND_PATH, file_name, as_attachment=True, mimetype='text/x-python')
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
