@@ -5,6 +5,7 @@ import ErrorScreens from '../../../modules/Error/Navigation/ErrorScreens';
 import WikiScreens from '../../../modules/Wiki/Navigation/WikiScreens';
 import StatusScreens from '../../../modules/Status/Navigation/StatusScreens';
 import HomeScreens from '../../../modules/Home/Navigation/HomeScreens';
+import AboutUsScreens from '../../../modules/AboutUs/Navigation/AboutUsScreens';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
                 {WikiScreens}
                 {StatusScreens}
                 {ErrorScreens}
+                {AboutUsScreens}
             </Route>
             
         </>,

@@ -24,8 +24,8 @@ current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 ###################### Set file location ##########################
-script_dir = os.path.dirname(__file__)
-log_dir = os.path.join(script_dir, "data", "logfiles")
+BACKEND_PATH = os.path.dirname(__file__)
+log_dir = os.path.join(BACKEND_PATH, "data", "logfiles")
 os.makedirs(log_dir, exist_ok=True)
 log_file_path = os.path.join(log_dir, "logfile_DOMtoCSV.log")
 # Python logging
@@ -113,8 +113,8 @@ class RuleProcessor:
         specific_prefix = 'PCS_SOT'  # Define the specific prefix for SOT values
         
         # Path to the image file
-        image1_path = os.path.join(os.path.dirname(__file__), "RFC","Data Watch - HDMx OOP RFC.png")
-        image2_path = os.path.join(os.path.dirname(__file__), "RFC","Data Watch - TCUI VID Search.png")
+        image1_path = os.path.join(BACKEND_PATH, "RFC","Data Watch - HDMx OOP RFC.png")
+        image2_path = os.path.join(BACKEND_PATH, "RFC","Data Watch - TCUI VID Search.png")
 
         base64_image1 = get_base64_image(image1_path)
         base64_image2 = get_base64_image(image2_path)
@@ -497,8 +497,8 @@ folders_to_monitor = ['test1', 'test2']
 # folders_to_monitor_prod = ['HXV001','HXV002','HXV003','HXV004','HXV005','HXV006','HXV007','HXV008','HXV009','HXV010','HXV011','HXV012','HXV013','HXV015','HXV016','HXV017','HXV201','HXV202','HXV203','HXV204','HXV205','HXV206','HXV207','HXV208','HXV209','HXV210','HMV801','HMV802','HMV803','HMV804','HMV805','HMV806','HMV807']
 
 # Define the output CSV file path (single file for all folders)
-output_csv_path = r'C:\Projects\datawatchUI\backend\data\Raw_Data_TEST.csv'
-trigger_csv_path = r'C:\Projects\datawatchUI\backend\data\Trigger_Data_TEST.csv'
+output_csv_path = os.path.join(BACKEND_PATH,"data","Raw_Data_TEST.csv")
+trigger_csv_path = os.path.join(BACKEND_PATH,"data","Trigger_Data_TEST.csv")
 
 # Create a lock object
 csv_file_lock = Lock()
