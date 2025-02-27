@@ -3,7 +3,29 @@ from flask_cors import CORS
 import os
 import csv
 import re
-import subprocess
+# import win32evtlogutil
+# import win32evtlog
+# import win32con
+
+# def log_custom_event(message, event_id=1001):
+#     # "DataWatchBackend" is the source name for the event.
+#     # Make sure to register this source if needed.
+#     source = "DataWatchBackend"
+#     try:
+#         win32evtlogutil.ReportEvent(
+#             source, 
+#             event_id, 
+#             eventType=win32evtlog.EVENTLOG_INFORMATION_TYPE, 
+#             strings=[message]
+#         )
+#     except Exception as e:
+#         print("Failed to log event:", e)
+
+# # Example: Log an event when the app starts
+# log_custom_event("DataWatchBackend service started successfully.", event_id=1001)
+
+
+############################### FLASK ####################################
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS to allow React to access the API
@@ -31,14 +53,14 @@ BACKEND_PATH = os.path.dirname(__file__)
 
 ############################### HOME ####################################
 # Path to the CSV file
-DATA_PATH = os.path.join(BACKEND_PATH, 'data', 'Trigger_Data_TEST.csv')
+CSV_DATA_PATH = os.path.join(BACKEND_PATH, 'data', 'Trigger_Data_TEST.csv')
 
 # Route to fetch CSV data
 @app.route('/api/csv', methods=['GET'])
 def get_csv_data():
     try:
         # Read CSV and convert to a list of dictionaries
-        with open(DATA_PATH, 'r') as csvfile:
+        with open(CSV_DATA_PATH, 'r') as csvfile:
             reader = csv.DictReader(csvfile)
             fieldnames = reader.fieldnames
             data = list(reader)[:20]  # Convert the CSV rows to a list of dictionaries
@@ -136,12 +158,12 @@ def download_rule_python():
     try:
         # Check if the file exists
         file_name = "RuleCreation.py"
-        file_path = os.path.join(BACKEND_PATH, file_name)
+        file_path = os.path.join(DATA_FOLDER,file_name)
         if not os.path.exists(file_path):
             return jsonify({"error": "File not found"}), 404
         
         # Serve the file
-        return send_from_directory(BACKEND_PATH, file_name, as_attachment=True, mimetype='text/x-python')
+        return send_from_directory(DATA_FOLDER, file_name, as_attachment=True, mimetype='text/x-python')
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
