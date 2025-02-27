@@ -232,7 +232,7 @@ const Wiki = () => {
                     <GreenWords>Script Template</GreenWords>
             
                         <a
-                            href="http://localhost:5000/api/download/rule-python"
+                            href={`${import.meta.env.VITE_API_URL}/api/download/rule-python`}
                             download="Rule-Creation-Template"
                             target="_blank"
                             rel="noreferrer"
