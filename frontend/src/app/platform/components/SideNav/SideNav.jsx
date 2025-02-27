@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import COLORS from '../../Style/Colors';
 import FONTSIZE from '../../Style/FontSize';
 import NavLinkUtils from '../../Utils/NavLinkUtils';
+import { IoHome } from "react-icons/io5";
+import { FaBook } from "react-icons/fa6";
+import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
+import { TbFileSad } from "react-icons/tb";
+import { MdFace } from "react-icons/md";
 
 const NavList = styled.ul`
   list-style: none;
@@ -28,6 +33,9 @@ const AboutSection = styled.div`
 `;
 
 const StyledNavLink = styled(NavLink)`
+    display: flex;
+    align-items: center; 
+    gap: 0.5rem;
     text-decoration: none;
     font-size: ${FONTSIZE.medium};
     padding: 0.5rem 1rem;
@@ -52,33 +60,36 @@ const StyledNavLink = styled(NavLink)`
     }
 `;
 
+
 export default function SideNav() {
     return (
         <NavList>
             <NavLinkContainer>
+                
                 <StyledNavLink
+                
                     to="/Home"
                     style={NavLinkUtils.activeStyleWithFontWeight}
                 >
-                    Home
+                    <IoHome />  Home
                 </StyledNavLink>
                 <StyledNavLink
                     to="/Wiki"
                     style={NavLinkUtils.activeStyleWithFontWeight}
                 >
-                    Wiki
+                    <FaBook />  Wiki
                 </StyledNavLink>
                 <StyledNavLink
                     to="/Status"
                     style={NavLinkUtils.activeStyleWithFontWeight}
                 >
-                    Status
+                    <HiOutlineWrenchScrewdriver />    Status
                 </StyledNavLink>
                 <StyledNavLink
                     to="/Error"
                     style={NavLinkUtils.activeStyleWithFontWeight}
                 >
-                    Error
+                    <TbFileSad /> Error
                 </StyledNavLink>
                 </NavLinkContainer>
                 
@@ -88,7 +99,7 @@ export default function SideNav() {
                     to="/AboutUs"
                     style={NavLinkUtils.activeStyleWithFontWeight}
                 >
-                    About Us
+                    <MdFace />  About Us
                 </StyledNavLink>
                 
                 </AboutSection>

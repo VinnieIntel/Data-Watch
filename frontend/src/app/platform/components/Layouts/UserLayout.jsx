@@ -3,7 +3,6 @@ import Header from '../Header/Header';
 import SideNav from '../SideNav/SideNav';
 import { Outlet } from 'react-router-dom';
 import * as React from 'react';
-import { useRef, useState, useEffect } from 'react';
 
 const LayoutContainer = styled.div`
     display: flex;
@@ -23,7 +22,7 @@ const SideNavContainer = styled.div`
     position: fixed;
     flex-shrink: 0;
     left: 40px;
-    width: 160px;
+    width: 200px;
     overflow-y: auto;
     z-index: 2;
 `;
@@ -35,7 +34,7 @@ const ContentContainer = styled.div`
 `;
 
 const MainContent = styled.div`
-    margin-left: 200px;
+    margin-left: 230px;
     width: calc(100% - 200px);
     padding: 2rem;
 `;
